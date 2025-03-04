@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Scene Slider</title>
+    <meta name="description" content="Elegant scene transition slider between two videos" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:image" content="/og-image.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="celebration-message">
+        <h1>Happy Women's Day</h1>
+      </div>
+      <div class="video-container">
+        <video id="scene1" class="active" loop muted autoplay>
+          <source src="raccoon1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <video id="scene2" loop muted autoplay>
+          <source src="raccoon2-kling.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      <div class="controls">
+        <div class="scene-label">Scene 1</div>
+        <div class="slider-container">
+          <input type="range" min="0" max="1" value="0" step="1" class="slider" id="sceneSlider">
+          <div class="slider-track">
+            <div class="slider-fill" id="sliderFill"></div>
+          </div>
+        </div>
+        <div class="scene-label">Scene 2</div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const slider = document.getElementById('sceneSlider');
+        const scene1 = document.getElementById('scene1');
+        const scene2 = document.getElementById('scene2');
+        const sliderFill = document.getElementById('sliderFill');
+        
+        // Function to update slider fill
+        function updateSliderFill() {
+          const value = slider.value;
+          const fillPercentage = value * 100;
+          sliderFill.style.width = fillPercentage + '%';
+        }
+        
+        // Initialize fill
+        updateSliderFill();
+        
+        slider.addEventListener('input', function() {
+          if (this.value == 0) {
+            scene1.classList.add('active');
+            scene2.classList.remove('active');
+          } else {
+            scene2.classList.add('active');
+            scene1.classList.remove('active');
+          }
+          
+          // Update fill when slider value changes
+          updateSliderFill();
+        });
+      });
+    </script>
+  </body>
+</html>
